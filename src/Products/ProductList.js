@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import useFetchProducts from "./useFetchProducts";
-import { Link } from "react-router-dom";
+
 import { Grid, Paper } from "@mui/material";
-import NavBar from "../Components/NavBar";
-import SideBar from "../Components/SideBar";
 import ProductCard from "./ProductCard";
 function ProductList() {
-  const [products] = useFetchProducts();
+  const [products, isLoading] = useFetchProducts();
 
   useEffect(() => {
     console.log(products);
@@ -17,7 +15,7 @@ function ProductList() {
       <Grid container spacing={3} sx={{ margin: "auto" }}>
         {products?.map((product) => (
           <Grid item key={product.id} xs={12} md={6} lg={3}>
-            <ProductCard product={product} />
+            <ProductCard product={product} isLoading = {isLoading} />
           </Grid>
         ))}
       </Grid>
