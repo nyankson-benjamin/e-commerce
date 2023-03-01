@@ -6,6 +6,7 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ProductSkeleton from "../Components/Skeleton";
 import CartModal from "./CartModal";
+import ProductCard from "./ProductCard";
 export default function ProductPage() {
   const [products, isLoading] = useFetchProducts();
   const { id } = useParams();
@@ -22,12 +23,23 @@ export default function ProductPage() {
   const handleClose = () => setOpen(false);
   return (
     <div>
-      <CartModal
-        handleOpen={handleOpen}
-        open={open}
-        handleClose={handleClose}
-        image={image}
-      />
+      {product && (
+        <CartModal
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          image={image}
+          images={product.images}
+          title={product.title}
+          price={(
+            product.price -
+            (product.discountPercentage / 100) * product.price
+          ).toFixed(2)}
+
+          brand = {product.brand}
+          category = {product.category}
+        />
+      )}
       {isLoading ? (
         <ProductSkeleton />
       ) : (
@@ -64,39 +76,30 @@ export default function ProductPage() {
                     flexDirection: "row",
                     justifyContent: "center",
                   }}
-                  className="smImages"
                 >
-                  <img
-                    src={product.thumbnail}
-                    alt=""
-                    width={100}
-                    onClick={() => setImage(product.images[0])}
-                  />
-                  <img
-                    src={product.images[1]}
-                    alt=""
-                    width={100}
-                    onClick={() => setImage(product.images[1])}
-                  />
-                  <img
-                    src={product.images[2]}
-                    alt=""
-                    width={100}
-                    onClick={() => setImage(product.images[2])}
-                  />
+                  {product?.images?.map((imgs, index) => (
+                    <img
+                      src={imgs}
+                      width={55}
+                      onClick={() => setImage(imgs)}
+                      key={index}
+                      className="smImages"
+                    />
+                  ))}
                 </div>
               </div>
               <div style={{ paddingLeft: "10px", width: "55%" }}>
                 <p style={{ color: "#282c34", fontWeight: "bold" }}>
-                  {`${product.title} || ${product.title}`}
+                  {`${product.title} || ${product.description}`}
                 </p>
+                <p>{product.id}</p>
 
                 <p style={{ color: "#282c34" }}>Brand: {product.brand}</p>
                 <p style={{ color: "#282c34" }}>
                   $
                   {(
                     product.price -
-                      ((product.discountPercentage / 100) * product.price)
+                    (product.discountPercentage / 100) * product.price
                   ).toFixed(2)}
                 </p>
                 <p style={{ color: "#282c34", fontWeight: "bold" }}>

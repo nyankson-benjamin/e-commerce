@@ -13,9 +13,9 @@ code {
 }
 
 .card {
-  background: white;
+  /* background: white; */
   margin: 10px;
-  min-width: 200px;
+  min-width: 100px;
   height: 200px;
   text-align: center;
   border-radius: 10px;
@@ -28,10 +28,10 @@ code {
   font-weight: bold;
 }
 
-.card:hover {
+/* .card:hover {
   background-color: yellow;
   color: blue;
-}
+} */
 
 a {
   text-decoration: none;
@@ -40,12 +40,13 @@ a {
   margin-top: 10px;
 }
 
-.smImages img {
+.smImages {
   margin: 1px;
 }
-.smImages img:hover {
-  border: 1px solid red;
+.smImages:hover {
+  border: 2px solid red;
   border-radius: 5px;
+  /* width: 65px; */
 }
 
 .bigImage:hover {
@@ -54,4 +55,22 @@ a {
 
 .productCard:hover {
   transform: scale(1.01);
+}
+
+.check {
+  animation: moveCheck 1s ease-in-out;
+}
+
+@keyframes moveCheck {
+  from {
+    /* height: 0px; */
+    opacity: 0;
+    /* width: 0px; */
+  }
+
+  to {
+    /* height: 200px; */
+    opacity: 1;
+    /* width: 200px; */
+  }
 }

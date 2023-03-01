@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import { dummyURL } from "../constants/url";
+import { DUMMy_API } from "../Services/api";
 export default function () {
   const [products, setProducts] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -8,7 +9,7 @@ export default function () {
     const fetch = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get("https://dummyjson.com/products");
+        const response = await DUMMy_API.get("products/");
         setIsLoading(false);
         setProducts(response?.data?.products);
       } catch (error) {

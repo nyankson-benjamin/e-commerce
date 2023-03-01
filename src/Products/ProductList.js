@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useFetchProducts from "./useFetchProducts";
-
+import CardSlider from "./CardSlider";
 import { Grid, Paper } from "@mui/material";
 import ProductCard from "./ProductCard";
 function ProductList() {
@@ -10,12 +10,13 @@ function ProductList() {
     console.log(products);
   });
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ margin: "auto" }}>
       <p style={{ textAlign: "center" }}>Avalable products</p>
+      <CardSlider cards={products} />
       <Grid container spacing={3} sx={{ margin: "auto" }}>
         {products?.map((product) => (
           <Grid item key={product.id} xs={12} md={6} lg={3}>
-            <ProductCard product={product} isLoading = {isLoading} />
+            <ProductCard product={product} isLoading={isLoading} />
           </Grid>
         ))}
       </Grid>

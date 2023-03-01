@@ -10,7 +10,7 @@ export default function () {
         marginTop: "10px",
       }}
     >
-      <Link to={"/products"} style={{ color: "#282c34", padding: "10px" }}>
+      <Link to={"/"} style={{ color: "#282c34", padding: "10px" }}>
         Miles
       </Link>
     </div>

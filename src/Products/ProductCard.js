@@ -2,12 +2,13 @@ import React from "react";
 import {
   CardHeader,
   Card,
-  IconButton,
   CardContent,
   Typography,
+  Stack,
+  Rating,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { DeleteOutlineOutlined } from "@mui/icons-material";
+
 import Skeleton from "../Components/Skeleton";
 function ProductCard({ product, isLoading }) {
   return (
@@ -16,7 +17,11 @@ function ProductCard({ product, isLoading }) {
         <Skeleton />
       ) : (
         <Link to={`/productPage/${product.id}`}>
-          <Card elevation={4} className="productCard">
+          <Card
+            elevation={1}
+            className="productCard"
+            sx={{ width: "90%", ml: -0.8 }}
+          >
             <img
               src={product.thumbnail}
               alt=""
@@ -39,9 +44,16 @@ function ProductCard({ product, isLoading }) {
                   (product.discountPercentage / 100) * product.price
                 ).toFixed(2)}
               </p>
-              <p>
+              <p style={{ letterSpacing: 5 }}>
                 <s>${product.price}</s>
               </p>
+              <Stack>
+                <Rating
+                  name="half-rating"
+                  defaultValue={product.rating}
+                  precision={0.5}
+                />
+              </Stack>
             </CardContent>
           </Card>
         </Link>
